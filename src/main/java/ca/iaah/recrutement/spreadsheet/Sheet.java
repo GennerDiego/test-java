@@ -12,7 +12,7 @@ public class Sheet {
 
     public String operation(String operation) {
 
-        if (isBlankOrNull(operation) || (operation.contains("=") && !existMathematicalOperators(operation)))
+        if (isNecessaryOperation(operation))
             return operation.substring(1);
 
         builder = new StringBuilder();
@@ -53,6 +53,10 @@ public class Sheet {
 
     private boolean existMathematicalOperators(String value) {
         return value.contains("^") || value.contains("*") || value.contains("+") || value.contains("/");
+    }
+
+    private boolean isNecessaryOperation(String operation){
+        return isBlankOrNull(operation) || (operation.contains("=") && !existMathematicalOperators(operation));
     }
 
     public String getLiteral(String theCell) {
